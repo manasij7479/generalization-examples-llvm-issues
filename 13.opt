@@ -1,0 +1,28 @@
+; https://github.com/llvm/llvm-project/issues/61183
+
+%x:i32 = var
+%cmp = eq %x, 0
+%shr = lshr %x, 1
+%ctlz = ctlz %shr
+%sub = sub 32, %ctlz
+%shl = shl  1, %sub
+%sel = select %cmp, 0, %shl
+infer %sel
+%ctlz_ = ctlz %x
+%shl_ = lshr -2147483648, %ctlz_
+%sel_ = select %cmp, 0, %shl_
+result %sel_
+
+; weird result on shrinked version, width independence fails
+
+;	Input (profit=2):
+
+;select (x:i8 == 0) 0 (1 << (0xBC - ctlz((x >>l 1))))
+;  =>
+;select (x == 0) 0 (3 >>l ctlz(x))
+
+;	Generalized (profit=1):
+
+;select newvar1:i1 C3:i8 (C2:i8 << (C1:i8 (negative) - ctlz(newvar0:i8)))
+;  =>
+;select newvar1 C3 (3 >>l ctlz(x:i8))

@@ -1,0 +1,29 @@
+;https://github.com/llvm/llvm-project/issues/61538
+
+%a:i8 = var
+%b:i8 = var
+%mul = shlnsw %a, 1
+%mul1 = mulnsw %mul, %b
+%add = or %mul1, 1
+%cmpinv = slt %add, 1
+%mul2 = select  %cmpinv, %b, 1
+%cond = mulnsw %mul2, %a
+infer %cond
+%mul1_ = mulnsw %a, %b
+%cmpinv_ = slt %mul1_, 0
+%mul2_ = select %cmpinv_, %mul1_, %a
+result %mul2_
+
+; Proved width independence and some mulnsw -> mul
+
+;	Input (profit=3):
+
+;a:i8 *nsw (select (((b:i8 *nsw (a <<nsw 1)) | 1) <s 1) b 1)
+;  =>
+;select ((b *nsw a) <s 0) (b *nsw a) a
+
+;	Generalized (profit=3):
+
+;a * (select (((b *nsw (a <<nsw 1)) | 1) <s 1) b 1)
+;  =>
+;select ((b * a) <s 0) (b * a) a

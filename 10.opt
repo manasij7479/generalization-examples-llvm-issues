@@ -1,0 +1,19 @@
+; https://github.com/llvm/llvm-project/issues/61644
+
+%0:i32 = var
+%2 = ctpop %0
+%3 = eq %2, 1
+%ctlz = ctlz %0
+%bw = select %3, 31:i32, 32
+%sub = sub %bw, %ctlz
+%shl = shl 1, %sub
+infer %shl
+%dec = add %0, -1
+%lz = ctlz %dec
+%cnt = sub 0, %lz
+%mask = and %cnt, 31
+%res = shl 1, %mask
+result %res
+
+; significantly out of reach of souper
+; generalization fails at width independence

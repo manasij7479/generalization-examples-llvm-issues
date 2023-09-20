@@ -1,0 +1,21 @@
+;https://github.com/llvm/llvm-project/issues/61223
+
+%0:i32 = var
+%2 = and %0, 1
+%3 = ne %2, 0
+pc %3 1
+%4 = add %0, -1
+%5 = lshr %4, 1
+infer %5
+%2_ = lshr %0, 1
+result %2_
+
+
+; Suboptimal generalization
+; this can be easily made width independent
+
+;	Generalized (profit=1):
+
+;(v0 (knownBits=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx1) + 0xFFFFFFFF) >>l C2 (knownBits=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx1)
+;  =>
+;v0 >>l C2
