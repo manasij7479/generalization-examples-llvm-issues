@@ -1,0 +1,26 @@
+; https://github.com/llvm/llvm-project/issues/60801
+%arg:i32 = var
+%eq = eq %arg, 0
+%cttz = cttz %arg
+%shl = shlnuw 1, %cttz
+%xor = xor %shl, -1
+%and = and %xor, %arg
+%sel = select %eq, 0, %and
+infer %sel
+%dec = add %arg, -1
+%and_ = and %arg, %dec
+result %and_
+
+; proved width independence and shlnuw -> shl
+
+;	Input (profit=10):
+
+;select (arg:i32 == 0) 0 (arg & ~(1 <<nuw cttz(arg)))
+;  =>
+;arg & (arg + 0xFFFFFFFF)
+
+;	Generalized (profit=10):
+
+;select (arg == 0) 0 (arg & ~(1 << cttz(arg)))
+;  =>
+;arg & (arg + 0xFFFFFFFF)
