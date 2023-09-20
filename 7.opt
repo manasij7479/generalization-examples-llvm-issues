@@ -1,0 +1,23 @@
+;https://github.com/llvm/llvm-project/issues/61650
+
+%a:i32 = var
+%trunc:i16 = trunc %a
+%shl = shl %trunc, 8
+%ext:i32 = zext %shl
+infer %ext
+%shl2 = shl %a, 8
+%and = and %shl2, 65280
+result %and
+
+
+;	Input (profit=1):
+
+;zext((trunc(a:i32) << 8))
+;  =>
+;(a << 8) & 0xFF00
+
+;	Generalized (profit=1):
+
+;zext((trunc(a) << C1))
+;  =>
+;(a << zext(C1)) & zext((C1 ^ sext(1)))

@@ -1,0 +1,22 @@
+; https://github.com/llvm/llvm-project/issues/64305
+
+%0:i32 = var
+%2 = srem %0, 8
+%3 = slt %2, 0
+%4 = addnsw %2, 8
+%5 = select %3, %4, %2
+infer %5
+%2_ = and %0, 7
+result %2_
+
+;	Input (profit=9):
+
+;select ((v0:i32 %s 8) <s 0) ((v0 %s 8) +nsw 8) (v0 %s 8)
+;  =>
+;v0 & 7
+
+;	Generalized (profit=9):
+
+;select ((v0 %s C2 (powerOfTwo)) <s 0) (C2 + (v0 %s C2)) (v0 %s C2)
+;  =>
+;v0 & (C2 - 1)

@@ -1,0 +1,20 @@
+%x:i3 = var
+%sx:i5 = sext %x
+%notx = xor %x, -1
+%znotx:i5 = zext %notx
+%r = or %sx, %znotx
+infer %r
+%r_ = or %sx, 7
+result %r_
+
+;	Input (profit=2):
+
+;zext(~x:i3) | sext(x)
+;  =>
+;sext(x) | 7
+
+;	Generalized (profit=2):
+
+;zext((x ^ sext(1))) | sext(x)
+;  =>
+;zext(sext(1)) | sext(x)

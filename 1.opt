@@ -1,0 +1,35 @@
+; https://github.com/llvm/llvm-project/issues/66733
+
+;define i32 @src(i32 noundef %0)  {
+;  %2 = icmp eq i32 %0, 0
+;  %3 = zext i1 %2 to i32
+;  %4 = lshr i32 %0, 15
+;  %5 = xor i32 %4, -1
+;  %6 = and i32 %3, %5
+;  ret i32 %6
+;}
+
+;define i32 @tgt(i32 noundef %0)  {
+;  %2 = icmp eq i32 %0, 0
+;  %3 = zext i1 %2 to i32
+;  ret i32 %3
+;}
+
+%0:i32 = var
+%2 = eq %0, 0
+%3:i32 = zext %2
+%4 = lshr %0, 15
+%5 = xor %4, -1
+%6 = and %3, %5
+infer %6
+%2_ = eq %0, 0
+%3_:i32 = zext %2_
+result %3_
+
+; Current result (NOT OPTIMAL)
+;	Generalized (profit=3):
+;((v0 >>l C1) ^ sext(1)) & zext((v0 == 0))
+;  =>
+;zext((v0 == 0))
+
+

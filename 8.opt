@@ -1,0 +1,26 @@
+%0:i32 = var
+%2 = and %0, 2147483647
+%3 = eq %2, 0
+%4 = shl %0, 1
+%5 = select %3, 0, %4
+infer %5
+%2_ = shl %0, 1
+result %2_
+
+; CURRENT RESULT NOT OPTIMAL
+; NEEDS -1 >> 1 width independent constant
+
+;	Input (profit=5):
+
+;select ((v0:i32 & 0x7FFFFFFF) == 0) 0 (v0 << 1)
+;  =>
+;v0 << 1
+
+;	Generalized (profit=5):
+
+;let var0 = width(v0);
+;(width(2) <=u var0) & (var0 <=u 32)
+;  |=
+;select ((v0 & 0x7FFFFFFF) == 0) 0 (v0 << 1)
+;  =>
+;v0 << 1

@@ -1,0 +1,18 @@
+; https://github.com/llvm/llvm-project/issues/65968
+
+%x:i32 = var
+%y:i32 = var
+%xandC = and %x, -2147483648
+%xandCxorC = xor %xandC, -2147483648
+%flipy = xor %y, -1
+%flipyandC = and %flipy, -2147483648
+%flipyandCxorC = xor %flipyandC, -2147483648
+%ret = eq %xandCxorC, %flipyandCxorC
+infer %ret
+%xxory = xor %x, %y
+%rhs = slt %xxory, 0
+result %rhs
+
+
+; Souper infer FAIL
+; Generalization FAIL

@@ -1,0 +1,22 @@
+;https://github.com/llvm/llvm-project/issues/62263
+
+%0:i32 = var
+%1:i32 = var
+%3 = xor %1, -1
+%4 = or %3, %0
+%5 = eq %4, 0
+%6 = select %5, %0, 0
+infer %6
+result 0:i32
+
+;	Input (profit=6):
+
+;select ((v0:i32 | ~v1:i32) == 0) v0 0
+;  =>
+;0
+
+;	Generalized (profit=5):
+
+;select ((v0 | newvar0) == 0) v0 0
+;  =>
+;0
