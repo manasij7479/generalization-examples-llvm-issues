@@ -1,0 +1,29 @@
+; https://github.com/llvm/llvm-project/issues/57576
+
+%x:i128 = var
+%y:i128 = var
+%m = mul %x, 340282366920938463444927863358058659840
+%a = add %y, %m
+%r = shl %a, 64
+infer %r
+%r_ = shl %y, 64
+result %r_
+
+
+; Successfully shrinked
+;(y:i8 + (x:i8 * 0x60)) << 4
+;  =>
+;y << 4
+
+; Generalization goes off the deep end with known bits; investigate
+; there has to something simpler here
+
+width(C4:i128 (knownBits=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx1xxxxxx)) == 0x80 &&
+width(y) == 0x80 &&
+width(x) == 0x80
+  |=
+let var1 = (x * 0xFFFFFFFFFFFFFFFF0000000000000000);
+let var0 = (y + var1);
+var0 << C4
+  =>
+y << C4

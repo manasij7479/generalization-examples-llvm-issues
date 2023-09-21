@@ -1,0 +1,30 @@
+; https://github.com/llvm/llvm-project/issues/57381
+
+%2:i16 = var
+%3:i32 = sext %2
+%4 = subnsw 1000, %3
+%5 = lshr %2, 15
+%6:i32 = zext %5
+%7 = subnsw 0, %6
+%8 = and %4, %7
+infer %8
+%5_ = slt %2, 0
+%6_ = select %5_, %4, 0
+result %6_
+
+; Input:
+
+;(0 -nsw zext((x2:i16 >>l 15))) & (0x3E8 -nsw sext(x2))
+;  =>
+;select (x2 <s 0) (0x3E8 -nsw sext(x2)) 0
+
+; Generalized
+
+;C5 == (width(C5) - 1)
+;  |=
+;let var1 = sext(v2);
+;let var0 = (C3 - var1);
+;(0 - zext((v2 >>l C5))) & var0
+;  =>
+;let var2 = (1 << C5);
+;select (v2 <s (var2 + var2)) var0 0

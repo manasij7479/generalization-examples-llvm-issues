@@ -1,0 +1,17 @@
+%0:i16 = var
+%2 = sdiv %0, 4
+%3 = and %0, -32765
+%4 = ult -32768, %3
+%5:i16 = sext %4
+%6 = addnsw %2, %5
+infer %6
+%2_ = ashr %0, 2
+result %2_
+
+; Shrinked successfully
+;(x0:i8 /s 2) + sext((0x80 <u (x0 & 0x81)))
+;  =>
+;x0 >>a 1
+
+; Generalization fails because of missing width independent constants
+; TODO investigate if we can do better

@@ -1,0 +1,22 @@
+%0:i32 = var
+%1:i32 = var
+%3 = sub 0, %0
+%4 = or %3, %0
+%5 = add %4, %0
+infer %5
+%3_ = add %0, -1
+%4_ = and %3_, %0
+result %4_
+
+
+;	Input (profit=1):
+
+;v0:i32 + (v0 | (0 - v0))
+;  =>
+;v0 & (v0 + 0xFFFFFFFF)
+
+;	Generalized (profit=1):
+
+;v0 + (v0 | (0 - v0))
+;  =>
+;v0 & (v0 + sext(1))

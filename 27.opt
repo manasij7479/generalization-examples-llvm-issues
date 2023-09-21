@@ -1,0 +1,27 @@
+;https://github.com/llvm/llvm-project/issues/57635
+
+%x:i8 = var
+%z = ne %x, 0
+pc %z 1
+%i = add %x, 255
+%c = ult %i, 7
+infer %c
+%c_ = ule %x, 7
+result %c_
+
+
+; same early exit issue- investigate
+
+	Input (profit=1):
+
+x:i8 (knownBits=xxxxx1xx) != 0
+  |=
+(x + 0xFF) <u 7
+  =>
+x <=u 7
+
+	Generalized (profit=1):
+
+(x:i8 (knownBits=xxxxx1xx) + 0xFF) <u C2:i8
+  =>
+x <=u C2

@@ -1,0 +1,23 @@
+; https://github.com/llvm/llvm-project/issues/57532
+
+
+%0:i32 = var
+%2 = xor %0, -1
+%3 = slt %0, %2
+infer %3
+%2_ = slt  %0, 0
+result %2_
+
+; Generates sext(1) ^ sext(1) for zero. avoid
+
+;	Input (profit=1):
+
+;v0:i32 <s ~v0
+;  =>
+;v0 <s 0
+
+;	Generalized (profit=1):
+
+;v0 <s (v0 ^ sext(1))
+;  =>
+;v0 <s (sext(1) ^ sext(1))
