@@ -1,0 +1,26 @@
+; https://github.com/llvm/llvm-project/issues/59266
+
+%c:i1 = var
+%x:i32= var
+%cmp = eq %x, 15
+%orcond = and %cmp, %c
+%cmp3 = ne %x, 0
+%or = or %cmp3, %c
+%orcond7 = xor %orcond, %or
+%notorcond7 = xor %orcond7, 1
+infer %notorcond7
+%cond = select %c, 15:i32, 0
+%cmp_ = eq %cond, %x
+result %cmp_
+
+;	Input (profit=2):
+
+;~((c:i1 & (x:i32 == 15)) ^ (c | (x != 0)))
+;  =>
+;x == (select c 15 0)
+
+;	Generalized (profit=2):
+
+;~((c & (x == C1)) ^ (c | (x != C2)))
+;  =>
+;x == (select c C1 C2)
