@@ -1,0 +1,22 @@
+; https://github.com/llvm/llvm-project/issues/58342
+%arg:i8 = var
+%sub = usub.sat %arg,  2
+%cmp = eq %sub, 5
+infer %cmp
+%cmp_ = eq %arg, 7
+result %cmp_
+
+; Poor and incomplete generalization due to early exit somewhere
+; TODO: Precondition synthesis needs overflow check?
+
+;	Input (profit=3):
+
+;(arg:i8 usub.sat 2) == 5
+;  =>
+;arg == 7
+
+;	Generalized (profit=3):
+
+;(arg:i8 usub.sat C2:i8 (powerOfTwo)) == 5
+;  =>
+;arg == (C2 + 5)

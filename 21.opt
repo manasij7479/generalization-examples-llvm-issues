@@ -1,0 +1,17 @@
+;https://github.com/llvm/llvm-project/issues/58523
+
+%0:i64 = var
+%2 = subnuw 71, %0
+%3 = and %2, -8
+%4 = sub 64, %3
+infer %4
+%2_ = and %0, 120
+result %2_
+
+; Shrinked successfully
+;0x7C - ((0x7D -nuw x0:i8) & 0x7E)
+;  =>
+;x0 & 0xFE
+; generalization gets stuck because of massive search space even at 8 bits
+; TODO: Figure out how to accelerate these (we have a few similar addition examples from souper)
+
