@@ -1,0 +1,30 @@
+; https://github.com/llvm/llvm-project/issues/58313
+
+%0:i1 = var
+%1:i1 = var
+%2:i1 = xor 1:i1, %1
+%3:i1 = select %0, %2, 0:i1
+pc %3 0:i1
+%4:i1 = xor 1:i1, %0
+%5:i1 = select %4, %1, 0:i1
+%6:i1 = xor %1, %0
+cand %5 %6
+
+
+; bad precondition synthesized, still potentially useful. FIXME
+
+	Input (profit=3):
+
+!(select v0:i1 ~v1:i1 0)
+  |=
+select ~v0 v1 0
+  =>
+v1 ^ v0
+
+	Generalized (profit=3):
+
+select v0 ~v1 C1:i1 == C1
+  |=
+select ~v0 v1 C1
+  =>
+v1 ^ v0

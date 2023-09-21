@@ -1,0 +1,31 @@
+; https://github.com/llvm/llvm-project/issues/58137
+
+; manually written souper IR for
+;int foo(int a, int b) {
+;    return (2 * a * b) / (2 * a);
+;}
+
+%a:i8 = var
+%b:i8 = var
+
+%0:i9 = umul.with.overflow %a, %b ; a * b
+%0_v = extractvalue %0, 0
+%0_o = extractvalue %0, 1
+pc %0_o 0
+
+%1:i9 = umul.with.overflow %0_v, 2 ; 2 * a * b
+%1_v = extractvalue %1, 0
+%1_o = extractvalue %1, 1
+pc %1_o 0
+
+%2:i9 = umul.with.overflow %a, 2 ; 2 * a
+%2_v = extractvalue %2, 0
+%2_o = extractvalue %2, 1
+pc %2_o 0
+
+%3:i8 = udiv %1_v, %2_v; (2 * a * b) / (2 * a)
+infer %3
+result %b
+
+; Souper succeeds
+; generalization fails with protocol error wtf
