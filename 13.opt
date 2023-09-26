@@ -1,4 +1,5 @@
 ; https://github.com/llvm/llvm-project/issues/61183
+; Partial
 
 %x:i32 = var
 %cmp = eq %x, 0
@@ -26,3 +27,5 @@ result %sel_
 ;select newvar1:i1 C3:i8 (C2:i8 << (C1:i8 (negative) - ctlz(newvar0:i8)))
 ;  =>
 ;select newvar1 C3 (3 >>l ctlz(x:i8))
+
+; FAIL

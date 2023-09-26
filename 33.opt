@@ -1,4 +1,5 @@
 ; https://github.com/llvm/llvm-project/issues/56562
+; Fail
 
 %x:i64 = var
 %0 = umul.with.overflow %x, 5
@@ -14,4 +15,5 @@ infer %0i
 result %r
 
 ; GENERALIZATION CRASH FIXME
+; FAIL
 

@@ -1,4 +1,5 @@
-;https://github.com/llvm/llvm-project/issues/61538
+; https://github.com/llvm/llvm-project/issues/61538
+; Optimal
 
 %a:i8 = var
 %b:i8 = var
@@ -27,3 +28,5 @@ result %mul2_
 ;a * (select (((b *nsw (a <<nsw 1)) | 1) <s 1) b 1)
 ;  =>
 ;select ((b * a) <s 0) (b * a) a
+
+;SUCCESS

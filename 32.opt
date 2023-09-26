@@ -1,4 +1,5 @@
 ; https://github.com/llvm/llvm-project/issues/57448
+; Fail
 
 %0:i64 = var
 %1:i1 = eq 0:i64, %0
@@ -10,3 +11,5 @@
 cand %4 %6
 
 ; GENERALIZATION CRASHES FIXME
+
+; FAIL

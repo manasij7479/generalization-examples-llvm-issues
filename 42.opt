@@ -1,4 +1,5 @@
 ; https://github.com/llvm/llvm-project/issues/41801
+; Optimal
 ; https://github.com/llvm/llvm-project/issues/41908
 
 %len:i32 = var
@@ -11,4 +12,6 @@ infer %r
 %res = ashr %input, %sub
 result %res
 
-; simplifies 32 - len to a new var, proves width independence
+;simplifies 32 - len to a new var, proves width independence
+
+;SUCCESS

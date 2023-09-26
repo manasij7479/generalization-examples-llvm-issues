@@ -1,5 +1,5 @@
 ; https://github.com/llvm/llvm-project/issues/57576
-
+; Fail
 %x:i128 = var
 %y:i128 = var
 %m = mul %x, 340282366920938463444927863358058659840
@@ -27,3 +27,5 @@ let var0 = (y + var1);
 var0 << C4
   =>
 y << C4
+
+;FAIL

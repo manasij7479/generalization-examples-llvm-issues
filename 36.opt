@@ -1,4 +1,5 @@
-;https://github.com/llvm/llvm-project/issues/57542
+; https://github.com/llvm/llvm-project/issues/57542
+; Fail
 
 %x:i8 = var
 %d = sdiv 42, %x
@@ -12,4 +13,4 @@ result %cmp_
 ; Can't generalize yet
 
 
-
+;FAIL

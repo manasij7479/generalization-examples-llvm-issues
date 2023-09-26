@@ -1,3 +1,6 @@
+;
+; Fail
+
 %0:i16 = var
 %2 = sdiv %0, 4
 %3 = and %0, -32765
@@ -15,3 +18,5 @@ result %2_
 
 ; Generalization fails because of missing width independent constants
 ; TODO investigate if we can do better
+
+; FAIL

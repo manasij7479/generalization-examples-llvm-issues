@@ -1,5 +1,5 @@
 ; https://github.com/llvm/llvm-project/issues/57666
-
+; Fail
 %0:i1 = var
 %1:i1 = var
 %t5 = select %0, 4:i32, 1
@@ -23,3 +23,5 @@ v1 ^ v0
 ((select v0:i1 C1:i32 (knownBits=xxxxxxxxxxxxxxxxxxxxxxxxxxxxx1x0) 1) & (select v1:i1 C1 1)) == 0
   =>
 v1 ^ v0
+
+;FAIL

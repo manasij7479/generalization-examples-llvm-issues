@@ -1,4 +1,5 @@
-;https://github.com/llvm/llvm-project/issues/61650
+; https://github.com/llvm/llvm-project/issues/61650
+; Optimal
 
 %a:i32 = var
 %trunc:i16 = trunc %a
@@ -21,3 +22,5 @@ result %and
 ;zext((trunc(a) << C1))
 ;  =>
 ;(a << zext(C1)) & zext((C1 ^ sext(1)))
+
+;SUCCESS

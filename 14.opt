@@ -1,4 +1,6 @@
 ; https://github.com/llvm/llvm-project/issues/60801
+; Optimal
+
 %arg:i32 = var
 %eq = eq %arg, 0
 %cttz = cttz %arg
@@ -24,3 +26,5 @@ result %and_
 ;select (arg == 0) 0 (arg & ~(1 << cttz(arg)))
 ;  =>
 ;arg & (arg + 0xFFFFFFFF)
+
+;SUCCESS

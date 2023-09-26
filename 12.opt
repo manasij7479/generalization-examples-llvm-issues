@@ -1,4 +1,5 @@
-;https://github.com/llvm/llvm-project/issues/61223
+; https://github.com/llvm/llvm-project/issues/61223
+; Partial
 
 %0:i32 = var
 %2 = and %0, 1
@@ -19,3 +20,5 @@ result %2_
 ;(v0 (knownBits=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx1) + 0xFFFFFFFF) >>l C2 (knownBits=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx1)
 ;  =>
 ;v0 >>l C2
+
+; FAIL

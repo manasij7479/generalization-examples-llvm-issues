@@ -1,4 +1,5 @@
 ; https://github.com/llvm/llvm-project/issues/55599
+; Optimal
 
 %0:i64 = var
 %1:i64 = var
@@ -10,3 +11,5 @@ infer %5
 result %5_
 
 ; Just proved width independence
+
+;SUCCESS

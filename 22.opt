@@ -1,4 +1,6 @@
 ; https://github.com/llvm/llvm-project/issues/58342
+; Fail
+
 %arg:i8 = var
 %sub = usub.sat %arg,  2
 %cmp = eq %sub, 5
@@ -20,3 +22,5 @@ result %cmp_
 ;(arg:i8 usub.sat C2:i8 (powerOfTwo)) == 5
 ;  =>
 ;arg == (C2 + 5)
+
+; FAIL

@@ -1,4 +1,5 @@
 ; https://github.com/llvm/llvm-project/issues/58137
+; Fail
 
 ; manually written souper IR for
 ;int foo(int a, int b) {
@@ -29,3 +30,5 @@ result %b
 
 ; Souper succeeds
 ; generalization fails with protocol error wtf
+
+; FAIL

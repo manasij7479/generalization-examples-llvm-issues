@@ -1,5 +1,5 @@
-;https://github.com/llvm/llvm-project/issues/63472
-
+; https://github.com/llvm/llvm-project/issues/63472
+; Optimal
 
 ; Notes : Shrinking fails
 

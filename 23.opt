@@ -1,4 +1,5 @@
 ; https://github.com/llvm/llvm-project/issues/58313
+; Optimal
 
 %0:i1 = var
 %1:i1 = var
@@ -28,3 +29,5 @@ select v0 ~v1 C1:i1 == C1
 select ~v0 v1 C1
   =>
 v1 ^ v0
+
+;SUCCESS

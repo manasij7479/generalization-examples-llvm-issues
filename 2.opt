@@ -1,5 +1,5 @@
 ; https://github.com/llvm/llvm-project/issues/65968
-
+; Optimal
 %x:i32 = var
 %y:i32 = var
 %xandC = and %x, -2147483648
@@ -15,4 +15,15 @@ result %rhs
 
 
 ; Souper infer FAIL
-; Generalization FAIL
+
+;	Input (profit=4):
+
+;((x:i32 & 0x80000000) ^ 0x80000000) == ((~y:i32 & 0x80000000) ^ 0x80000000)
+;  =>
+;(y ^ x) <s 0
+
+;	Generalized (profit=4):
+
+;((x & ((sext(1) >>l 1) ^ sext(1))) ^ ((sext(1) >>l 1) ^ sext(1))) == (((y ^ sext(1)) & ((sext(1) >>l 1) ^ sext(1))) ^ ((sext(1) >>l 1) ^ sext(1)))
+;  =>
+;(y ^ x) <s 0

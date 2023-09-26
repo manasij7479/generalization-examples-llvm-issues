@@ -1,4 +1,5 @@
 ; https://github.com/llvm/llvm-project/issues/59266
+; Optimal
 
 %c:i1 = var
 %x:i32= var
@@ -24,3 +25,5 @@ result %cmp_
 ;~((c & (x == C1)) ^ (c | (x != C2)))
 ;  =>
 ;x == (select c C1 C2)
+
+;SUCCESS

@@ -1,4 +1,6 @@
 ; https://github.com/llvm/llvm-project/issues/62155
+; Optimal
+
 %0:i32 = var
 %2 = and %0, 2147483647
 %3 = eq %2, 0
@@ -8,8 +10,6 @@ infer %5
 %2_ = shl %0, 1
 result %2_
 
-; CURRENT RESULT NOT OPTIMAL
-; NEEDS -1 >> 1 width independent constant
 
 ;	Input (profit=5):
 
@@ -19,9 +19,6 @@ result %2_
 
 ;	Generalized (profit=5):
 
-;let var0 = width(v0);
-;(width(2) <=u var0) & (var0 <=u 32)
-;  |=
-;select ((v0 & 0x7FFFFFFF) == 0) 0 (v0 << 1)
+;select ((v0 & (sext(1) >>l 1)) == 0) 0 (v0 << 1)
 ;  =>
 ;v0 << 1

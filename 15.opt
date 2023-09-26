@@ -1,4 +1,6 @@
 ; https://github.com/llvm/llvm-project/issues/60242
+; Optimal
+
 %0:i32 = var
 %1:i32 = lshr %0, 31:i32
 %2:i32 = var
@@ -23,3 +25,5 @@ cand %5 %7
 ;(v0:i32 >>l C1) == zext(newvar1:i1)
 ;  =>
 ;newvar1 ^ (v0 <u 0x80000000)
+
+;SUCCESS

@@ -1,4 +1,5 @@
 ; https://github.com/llvm/llvm-project/issues/64305
+; Optimal
 
 %0:i32 = var
 %2 = srem %0, 8

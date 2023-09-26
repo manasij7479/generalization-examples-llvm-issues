@@ -1,3 +1,5 @@
+;
+; Optimal
 %x:i3 = var
 %sx:i5 = sext %x
 %notx = xor %x, -1

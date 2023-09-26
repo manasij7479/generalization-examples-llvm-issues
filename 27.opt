@@ -1,5 +1,5 @@
-;https://github.com/llvm/llvm-project/issues/57635
-
+; https://github.com/llvm/llvm-project/issues/57635
+; Fail
 %x:i8 = var
 %z = ne %x, 0
 pc %z 1
@@ -25,3 +25,5 @@ x <=u 7
 (x:i8 (knownBits=xxxxx1xx) + 0xFF) <u C2:i8
   =>
 x <=u C2
+
+;FAIL

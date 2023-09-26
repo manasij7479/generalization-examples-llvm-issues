@@ -1,4 +1,5 @@
 ; https://github.com/llvm/llvm-project/issues/59680
+; Optimal
 
 %foo:i32 = var
 %bar = and %foo, -65536
@@ -42,3 +43,5 @@ result %eq1
 ;  %ret = or i1 %eq1, %eq2
 ;  ret i1 %ret
 ;}
+
+;SUCCESS

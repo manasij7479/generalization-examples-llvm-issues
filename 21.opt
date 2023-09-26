@@ -1,4 +1,5 @@
-;https://github.com/llvm/llvm-project/issues/58523
+; https://github.com/llvm/llvm-project/issues/58523
+; Fail
 
 %0:i64 = var
 %2 = subnuw 71, %0
@@ -15,3 +16,4 @@ result %2_
 ; generalization gets stuck because of massive search space even at 8 bits
 ; TODO: Figure out how to accelerate these (we have a few similar addition examples from souper)
 
+; FAIL

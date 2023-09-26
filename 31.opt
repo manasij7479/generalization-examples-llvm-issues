@@ -1,4 +1,5 @@
 ; https://github.com/llvm/llvm-project/issues/57381
+; Optimal
 
 %2:i16 = var
 %3:i32 = sext %2
@@ -28,3 +29,5 @@ result %6_
 ;  =>
 ;let var2 = (1 << C5);
 ;select (v2 <s (var2 + var2)) var0 0
+
+;SUCCESS

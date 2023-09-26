@@ -1,4 +1,5 @@
 ; https://github.com/llvm/llvm-project/issues/55016
+; Fail
 
 %x:i32 =  var
 %a = add %x, -1
@@ -9,4 +10,15 @@ result %r_
 
 ; Missing constant pattern, FIXME
 
+; FAIL
+
+%C1:i32 = var
+%C2:i32 = var
+
+%x:i32 =  var
+%a = add %x, %C1
+%r = ashrexact %C2, %a
+infer %r
+%r_ = ashr -4, %x
+result %r_
 

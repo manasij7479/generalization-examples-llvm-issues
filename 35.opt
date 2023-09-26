@@ -1,5 +1,5 @@
 ; https://github.com/llvm/llvm-project/issues/55739
-; ((2 << c) & 16) != 0
+; Fail
 
 %c:i32 = var
 %shl = shl 2, %c
@@ -13,3 +13,4 @@ result %4
 ; GENERALIZATION gets stuck
 ; Figure out what's missing
 
+;FAIL

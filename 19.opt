@@ -1,4 +1,6 @@
 ; https://github.com/llvm/llvm-project/issues/59482
+; Fail
+
 %x:i8 = var
 %1 = subnuw 255, %x
 %2:i16 = zext %1
@@ -11,14 +13,16 @@ result 1:i1
 ; Bad generalization result; tries to generalize the result 1:i1
 ; TODO: Block and retry
 
-	Input (profit=5):
+;	Input (profit=5):
 
-(zext(x:i8) +nw zext((0xFF -nuw x))) <u 0x100
-  =>
-1
+;(zext(x:i8) +nw zext((0xFF -nuw x))) <u 0x100
+;  =>
+;1
 
-	Generalized (profit=5):
+;	Generalized (profit=5):
 
-(zext(x:i8) +nw zext((0xFF - x))) <u C2:i16
-  =>
-((C2 * C2) umul.with.overflow (C2 o C2)) extractvalue 1
+;(zext(x:i8) +nw zext((0xFF - x))) <u C2:i16
+;  =>
+;((C2 * C2) umul.with.overflow (C2 o C2)) extractvalue 1
+
+;FAIL

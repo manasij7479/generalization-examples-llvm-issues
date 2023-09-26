@@ -1,4 +1,5 @@
 ; https://github.com/llvm/llvm-project/issues/60173
+; Optimal
 
 %n:i32 = var
 %notneg = add %n, 1
@@ -23,3 +24,5 @@ result %condv_
 ;n + (select (C4 == (C2 & (C3 + n))) C1 C3)
 ;  =>
 ;select (C4 == (C2 & (C3 + n))) (C1 + n) (C3 + n)
+
+;SUCCESS
