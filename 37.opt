@@ -1,0 +1,13 @@
+; https://github.com/llvm/llvm-project/issues/55618
+
+%0:i64 = var
+%1:i64 = var
+%3 = and %0, 1
+%4 = mul %3, %1
+infer %4
+%4_ = sub 0, %3
+%5 = and %4_, %1
+result %5
+
+; Just proved width independence
+

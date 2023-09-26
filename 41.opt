@@ -1,0 +1,16 @@
+;https://github.com/llvm/llvm-project/issues/51125
+
+%0:i8 = var
+%1:i8 = var
+%3 = sdiv %0, %1
+%4 = addnsw  %3, 1
+%5 = mulnsw %4, %1
+%6 = subnsw %5, %0
+infer %6
+%3_ = srem %0, %1
+%4_ = sub %1, %3_
+result %4_
+
+; converts +nsw 1 to +, and proves width independence
+
+

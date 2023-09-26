@@ -1,0 +1,23 @@
+; https://github.com/llvm/llvm-project/issues/54856
+
+%arg:i32 = var
+%a = ult %arg, 16
+%b = and %arg, 15
+%c = ne %b, 15
+%r = and %a, %c
+infer %r
+%r_ = ult %arg, 15
+result %r_
+
+; FIGURE OUT WHY THIS FAILS ASAP
+
+;%C:i32 = var (powerOfTwo)
+;%arg:i32 = var
+;%a = ult %arg, %C
+;%Cm1 = sub %C, 1
+;%b = and %arg, %Cm1
+;%c = ne %b, %Cm1
+;%r = and %a, %c
+;infer %r
+;%r_ = ult %arg, %Cm1
+;result %r_

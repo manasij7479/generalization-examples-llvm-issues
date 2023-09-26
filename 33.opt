@@ -1,0 +1,17 @@
+; https://github.com/llvm/llvm-project/issues/56562
+
+%x:i64 = var
+%0 = umul.with.overflow %x, 5
+%1 = extractvalue %0, 1
+%2 = extractvalue %0, 0
+%_8i = ult 9223372036854775807, %2
+%3 = or %1, %_8i
+%0i = select %3, -1, %2
+infer %0i
+%is_bigger = ult 1844674407370955161, %x
+%product = mulnw %x, 5
+%r = select %is_bigger, -1, %product
+result %r
+
+; GENERALIZATION CRASH FIXME
+

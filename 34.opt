@@ -1,0 +1,17 @@
+; https://github.com/llvm/llvm-project/issues/56124
+%c:i32 = var
+%shl = shl 2, %c
+%and = and %shl, 14
+%cmp = ne %and, 0
+%conv:i32 = zext %cmp
+infer %conv
+%cmp_ = ult %c, 3
+%conv_:i32 = zext %cmp_
+result %conv_
+
+; SHRINKED
+;zext((((0x55 << c:i8) & 0xD5) != 0))
+;  =>
+;zext((c <u 42))
+
+; GENERALIZATION GETS STUCK

@@ -1,0 +1,15 @@
+; https://github.com/llvm/llvm-project/issues/55739
+; ((2 << c) & 16) != 0
+
+%c:i32 = var
+%shl = shl 2, %c
+%and = and %shl, 16
+%ne = ne %and, 0
+infer %ne
+%4:i1 = eq 3:i32, %c
+result %4
+
+; Shrinked
+; GENERALIZATION gets stuck
+; Figure out what's missing
+

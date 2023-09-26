@@ -1,0 +1,12 @@
+; https://github.com/llvm/llvm-project/issues/55016
+
+%x:i32 =  var
+%a = add %x, -1
+%r = ashrexact -2, %a
+infer %r
+%r_ = ashr -4, %x
+result %r_
+
+; Missing constant pattern, FIXME
+
+

@@ -1,0 +1,14 @@
+; https://github.com/llvm/llvm-project/issues/41801
+; https://github.com/llvm/llvm-project/issues/41908
+
+%len:i32 = var
+%input:i32 = var
+%sub = sub 32, %len
+%zz = shl -1, %sub
+%shl = and %zz, %input
+%r = ashr %shl, %sub
+infer %r
+%res = ashr %input, %sub
+result %res
+
+; simplifies 32 - len to a new var, proves width independence

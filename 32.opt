@@ -1,0 +1,12 @@
+; https://github.com/llvm/llvm-project/issues/57448
+
+%0:i64 = var
+%1:i1 = eq 0:i64, %0
+%2:i8 = var (knownBits=0000000x) (nonNegative) (signBits=7) (range=[0,2))
+%3:i1 = ne 0:i8, %2
+%4:i1 = and %1, %3
+%5:i64 = sext %2
+%6:i1 = ult %0, %5
+cand %4 %6
+
+; GENERALIZATION CRASHES FIXME
