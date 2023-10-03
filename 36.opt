@@ -1,5 +1,5 @@
 ; https://github.com/llvm/llvm-project/issues/57542
-; Fail
+; Optimal
 
 %x:i8 = var
 %d = sdiv 42, %x
@@ -10,7 +10,7 @@ infer %cmp
 result %cmp_
 
 ;Great example
-; Can't generalize yet
 
-
-;FAIL
+;(C1 (nonNegative) /s x) == 0
+;  =>
+;(x + (C1 ^ sext(1))) <u ((C1 + C1) ^ sext(1))
