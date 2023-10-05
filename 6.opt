@@ -1,6 +1,6 @@
-; placeholder can't find the issue
+; placeholder/00000
 ; Success
-; z((\sim x)) \: | \: s(x) \Rightarrow z(s(1)) \: | \: s(x)
+; \text{zext}((\BitNeg{x})) \: | \: \text{sext}(x) \Rightarrow \text{zext}(\text{sext}(1) \: \text{to} \: W_x) \: | \: \text{sext}(x)
 
 %x:i3 = var
 %sx:i5 = sext %x

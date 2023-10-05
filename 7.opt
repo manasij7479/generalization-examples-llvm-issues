@@ -1,6 +1,6 @@
 ; https://github.com/llvm/llvm-project/issues/61650
 ; Success
-;z(t(x) \ll C) \Rightarrow (x << z(C)) \: \& \: z(\sim C)
+; \text{zext}(t(x) \ll C) \Rightarrow (x << \text{zext}(C)) \: \& \: \text{zext}(\BitNeg{C})
 
 %trunc:i16 = trunc %a
 %shl = shl %trunc, 8

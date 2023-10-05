@@ -1,6 +1,6 @@
 ; https://github.com/llvm/llvm-project/issues/58313
 ; Success
-; x \: ? \: \sim y : C == C \models \sim x \: ? \: y : C \Rightarrow y \oplus x
+; x \: ? \: \BitNeg{y} : C == C \models \BitNeg{x} \: ? \: y : C \Rightarrow y \oplus x
 
 %0:i1 = var
 %1:i1 = var
