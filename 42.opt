@@ -1,5 +1,5 @@
 ; https://github.com/llvm/llvm-project/issues/41801
-; Optimal
+; Success
 ; x \: \& \: (-1 \ll y) \gg_s y \Rightarrow x \gg_s y
 ; also https://github.com/llvm/llvm-project/issues/41908
 

@@ -1,5 +1,5 @@
 ; https://github.com/llvm/llvm-project/issues/60801
-; Optimal
+; Success
 ; x = 0 \: ?\: 0 : (x \: \& \: \sim (1 << cttz(x))) \Rightarrow x \: \& \: (x - 1)
 
 %arg:i32 = var

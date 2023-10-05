@@ -1,5 +1,5 @@
 ; https://github.com/llvm/llvm-project/issues/64305
-; Optimal
+; Success
 ; \text{pow2}(C) \models (x \%_s C) <_s 0 ? C + (x \%_s C) : x \%_s C \Rightarrow x \BitAnd (C - 1)
 
 %0:i32 = var

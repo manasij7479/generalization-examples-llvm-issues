@@ -1,5 +1,5 @@
 ; https://github.com/llvm/llvm-project/issues/66733
-; Optimal
+; Success
 ; \BitNeg{(x \gg C)} \: \& \: \text{zext}(x = 0) \Rightarrow x = 0
 
 %0:i32 = var

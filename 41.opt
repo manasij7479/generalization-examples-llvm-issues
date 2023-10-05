@@ -1,5 +1,5 @@
 ; https://github.com/llvm/llvm-project/issues/51125
-; Optimal
+; Success
 ; (y \times_\text{nsw} ((x /s y) + 1)) -_\text{nsw} x \Rightarrow y - (x \%_s y)
 %0:i8 = var
 %1:i8 = var

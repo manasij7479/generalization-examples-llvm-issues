@@ -1,5 +1,5 @@
 ; https://github.com/llvm/llvm-project/issues/61538
-; Optimal
+; Success
 ; a \times (((b \times_\text{nsw} (a \ll_\text{nsw} 1)) | 1) <s 1 \: ? \: b : 1) \Rightarrow (b \times a) <_s 0 \: ? \: (b \times a) : a
 
 %a:i8 = var

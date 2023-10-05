@@ -11,6 +11,6 @@ for i in *.opt; do
     link=${first:2}
     id=`echo $link | grep -Eo '[0-9]+$'`
     #echo $link $status $id
-    #\href{https://github.com/llvm/llvm-project/issues/66733}{66733} & Optimal &          \\
+    #\href{https://github.com/llvm/llvm-project/issues/66733}{66733} & Success &          \\
     echo "\href{$link}{$id} & ${second:2} & \$${third:2}\$ \\\\"
 done

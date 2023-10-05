@@ -1,5 +1,5 @@
 ; https://github.com/llvm/llvm-project/issues/59680
-; Optimal
+; Success
 ; C_4 <_u C_3 \models (C_1 = (C_2 \: \& \: x)) | (C_3 = (C_4 \: \& \: x)) \Rightarrow C_1 = (C_2 \: \& \: x)
 
 %foo:i32 = var

@@ -1,5 +1,5 @@
 ; https://github.com/llvm/llvm-project/issues/57635
-; Optimal
+; Success
 ; x \ne 0 \models (x + (-1)) <_u C \Rightarrow x \le_u C
 
 %x:i8 = var

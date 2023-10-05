@@ -1,5 +1,5 @@
 ; https://github.com/llvm/llvm-project/issues/63472
-; Optimal
+; Success
 ; (x \: ? \: C_1 : C_2) + \text{sext}(\sim x) \Rightarrow x \: ? \: C_1 : (C_2 - 1)
 ; Notes : Shrinking fails
 

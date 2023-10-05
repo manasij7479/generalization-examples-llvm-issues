@@ -1,5 +1,5 @@
 ; https://github.com/llvm/llvm-project/issues/55599
-; Optimal
+; Success
 ; (x \: \& \: 1) \times (y  \: \& \:  1) \Rightarrow (x  \: \& \:  1)  \: \& \:  (y  \: \& \:  1)
 
 %0:i64 = var

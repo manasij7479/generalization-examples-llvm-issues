@@ -1,5 +1,5 @@
 ; https://github.com/llvm/llvm-project/issues/58313
-; Optimal
+; Success
 ; x \: ? \: \sim y : C == C \models \sim x \: ? \: y : C \Rightarrow y \oplus x
 
 %0:i1 = var

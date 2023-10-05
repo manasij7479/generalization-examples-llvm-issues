@@ -1,5 +1,5 @@
 ; placeholder can't find the issue
-; Optimal
+; Success
 ; z((\sim x)) \: | \: s(x) \Rightarrow z(s(1)) \: | \: s(x)
 
 %x:i3 = var
