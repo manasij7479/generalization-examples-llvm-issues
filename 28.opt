@@ -11,7 +11,7 @@ infer %r
 result %r_
 
 
-; Successfully shrinked
+; shrinked
 ;(y:i8 + (x:i8 * 0x60)) << 4
 ;  =>
 ;y << 4

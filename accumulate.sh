@@ -11,10 +11,7 @@ for i in *.opt; do
     # extract all but first two letters
     link=${first:2}
     id=`echo $link | grep -Eo '[0-9]+$'`
-    #echo $link $status $id
-    #\href{https://github.com/llvm/llvm-project/issues/66733}{66733} & Success &          \\
     echo $link $id ${second:2} `echo -n $third | base64` >> $foo
-    # echo "\href{$link}{$id} & ${second:2} & \$${third:2}\$ \\\\"
 done
 
 # Sort foo numerically by second column (id)
