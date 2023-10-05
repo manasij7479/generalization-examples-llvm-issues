@@ -1,6 +1,6 @@
 ; https://github.com/llvm/llvm-project/issues/55618
 ; Success
-;y \times (x \: \& \: 1) \Rightarrow y \: \& \: (0 - (x \: \& \: 1))
+; y \times (x \: \& \: 1) \Rightarrow y \: \& \: (0 - (x \: \& \: 1))
 
 %0:i64 = var
 %1:i64 = var
