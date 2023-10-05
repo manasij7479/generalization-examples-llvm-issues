@@ -1,6 +1,6 @@
 ; https://github.com/llvm/llvm-project/issues/54856
 ; Success
-; p_2(C_1) \land (C_1 - C_2) = 1 \models (C_2 \ne (C_2 \: \& \: x)) \: \& \: (x <u C1) \Rightarrow x <_u C_2
+; p_2(C_1) \land (C_1 - C_2) = 1 \models (C_2 \ne (C_2 \: \& \: x)) \: \& \: (x <_u C1) \Rightarrow x <_u C_2
 
 %arg:i32 = var
 %a = ult %arg, 16
