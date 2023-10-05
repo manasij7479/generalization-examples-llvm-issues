@@ -1,6 +1,6 @@
 ; https://github.com/llvm/llvm-project/issues/59482
 ; Fail
-
+; \text{Crash}
 %x:i8 = var
 %1 = subnuw 255, %x
 %2:i16 = zext %1

@@ -1,5 +1,7 @@
 ; https://github.com/llvm/llvm-project/issues/65968
 ; Optimal
+; ((x \: \& \: \text{Min}_S) \oplus \text{Min}_S) == ((\sim y \: \& \: \text{Min}_S) \oplus \text{Min}_S) \Rightarrow (y \oplus x) <_s 0
+
 %x:i32 = var
 %y:i32 = var
 %xandC = and %x, -2147483648

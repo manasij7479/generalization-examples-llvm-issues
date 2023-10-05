@@ -1,5 +1,7 @@
-;
+; placeholder can't find the issue
 ; Optimal
+; z((\sim x)) \: | \: s(x) \Rightarrow z(s(1)) \: | \: s(x)
+
 %x:i3 = var
 %sx:i5 = sext %x
 %notx = xor %x, -1

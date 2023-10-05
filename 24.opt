@@ -1,6 +1,6 @@
 ; https://github.com/llvm/llvm-project/issues/58137
 ; Fail
-
+; \text{Crash}
 ; manually written souper IR for
 ;int foo(int a, int b) {
 ;    return (2 * a * b) / (2 * a);

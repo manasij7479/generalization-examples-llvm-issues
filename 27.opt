@@ -1,5 +1,7 @@
 ; https://github.com/llvm/llvm-project/issues/57635
-; Fail
+; Optimal
+; x \ne 0 \models (x + (-1)) <_u C \Rightarrow x \le_u C
+
 %x:i8 = var
 %z = ne %x, 0
 pc %z 1
@@ -10,20 +12,6 @@ infer %c
 result %c_
 
 
-; same early exit issue- investigate
-
-	Input (profit=1):
-
-x:i8 (knownBits=xxxxx1xx) != 0
-  |=
-(x + 0xFF) <u 7
-  =>
-x <=u 7
-
-	Generalized (profit=1):
-
-(x:i8 (knownBits=xxxxx1xx) + 0xFF) <u C2:i8
-  =>
-x <=u C2
-
-;FAIL
+;(x (nonZero) + sext(1)) <u C2
+;  =>
+;x <=u C2

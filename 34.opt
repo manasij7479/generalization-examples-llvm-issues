@@ -1,5 +1,7 @@
 ; https://github.com/llvm/llvm-project/issues/56124
 ; Fail
+; \text{Missing precondition}
+
 %c:i32 = var
 %shl = shl 2, %c
 %and = and %shl, 14

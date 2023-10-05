@@ -1,5 +1,6 @@
 ; https://github.com/llvm/llvm-project/issues/62701
 ; Fail
+; \text{Complex precondition out of scope}
 ; (C2 - 1 < 0 && C2 + C1 >= 0 && C2 u>= C1 && C2 != C1)
 
 %0:i64 = var

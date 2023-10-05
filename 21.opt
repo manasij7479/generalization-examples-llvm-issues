@@ -1,6 +1,6 @@
 ; https://github.com/llvm/llvm-project/issues/58523
 ; Fail
-
+; \text{Massive search space}
 %0:i64 = var
 %2 = subnuw 71, %0
 %3 = and %2, -8

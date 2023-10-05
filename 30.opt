@@ -1,5 +1,6 @@
 ; https://github.com/llvm/llvm-project/issues/57531
 ; Optimal
+; x + (x \: | \: (0 - x)) \Rightarrow x \: \& \: (x - 1)
 
 %0:i32 = var
 %1:i32 = var

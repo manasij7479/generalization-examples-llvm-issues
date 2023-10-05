@@ -1,5 +1,6 @@
 ; https://github.com/llvm/llvm-project/issues/59266
 ; Optimal
+; \sim ((y \: \& \:(x = C_1)) \oplus (y \: | \: (x \ne C_2))) \Rightarrow x =y \: ? \: C_1 : C_2
 
 %c:i1 = var
 %x:i32= var

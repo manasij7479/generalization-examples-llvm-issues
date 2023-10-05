@@ -1,5 +1,6 @@
 ; https://github.com/llvm/llvm-project/issues/57381
 ; Optimal
+;C_2 = (W_x - 1) \models (0 - z((x \gg_u C_2))) \: \& \: (C_1 - s(x)) \Rightarrow x <s (1 << (C_2 + 1)) \: ? \: (C_1 - s(x)) : 0
 
 %2:i16 = var
 %3:i32 = sext %2

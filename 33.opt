@@ -1,5 +1,6 @@
 ; https://github.com/llvm/llvm-project/issues/56562
 ; Fail
+; \text{Crash}
 
 %x:i64 = var
 %0 = umul.with.overflow %x, 5

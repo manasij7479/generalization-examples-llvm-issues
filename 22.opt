@@ -1,5 +1,6 @@
 ; https://github.com/llvm/llvm-project/issues/58342
-; Fail
+; Partial
+; \text{Missing precondition}
 
 %arg:i8 = var
 %sub = usub.sat %arg,  2

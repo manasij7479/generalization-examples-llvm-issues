@@ -1,6 +1,6 @@
 ; https://github.com/llvm/llvm-project/issues/57542
 ; Optimal
-
+; C \ge 0 \models (C /_s x) = 0 \Rightarrow (x + \BitNeg{C}) <_u \BitNeg{(C1 + C1)}
 %x:i8 = var
 %d = sdiv 42, %x
 %cmp = eq %d, 0

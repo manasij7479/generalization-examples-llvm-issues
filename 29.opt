@@ -1,5 +1,6 @@
 ; https://github.com/llvm/llvm-project/issues/57532
 ; Optimal
+; x <_s \BitNeg(x) x <_s 0
 
 %0:i32 = var
 %2 = xor %0, -1

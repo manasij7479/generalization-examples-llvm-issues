@@ -1,5 +1,6 @@
 ; https://github.com/llvm/llvm-project/issues/61644
 ; Fail
+; \text{Could not prove width independence}
 
 %0:i32 = var
 %2 = ctpop %0

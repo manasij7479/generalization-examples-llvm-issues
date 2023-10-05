@@ -1,7 +1,7 @@
 ; https://github.com/llvm/llvm-project/issues/61650
 ; Optimal
+;z(t(x) \ll C) \Rightarrow (x << z(C)) \: \& \: z(\sim C)
 
-%a:i32 = var
 %trunc:i16 = trunc %a
 %shl = shl %trunc, 8
 %ext:i32 = zext %shl

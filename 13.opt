@@ -1,5 +1,6 @@
 ; https://github.com/llvm/llvm-project/issues/61183
 ; Partial
+; \text{Could not prove width independence}
 
 %x:i32 = var
 %cmp = eq %x, 0

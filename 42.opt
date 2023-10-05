@@ -1,6 +1,7 @@
 ; https://github.com/llvm/llvm-project/issues/41801
 ; Optimal
-; https://github.com/llvm/llvm-project/issues/41908
+; x \: \& \: (-1 \ll y) \gg_s y \Rightarrow x \gg_s y
+; also https://github.com/llvm/llvm-project/issues/41908
 
 %len:i32 = var
 %input:i32 = var
@@ -15,3 +16,7 @@ result %res
 ;simplifies 32 - len to a new var, proves width independence
 
 ;SUCCESS
+
+;(input & (sext(1) << newvar0)) >>a newvar0
+  =>
+;input >>a newvar0

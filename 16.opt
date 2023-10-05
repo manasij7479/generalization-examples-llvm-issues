@@ -1,5 +1,6 @@
 ; https://github.com/llvm/llvm-project/issues/60173
 ; Optimal
+; x + (C_4 = (C_2 \: \& \: (C_3 + x)) \: ?\: C_1 : C_3) \Rightarrow C_4 = (C_2 \: \& \: (C_3 + x)) \: ? : C_1 + x : C_3 + x
 
 %n:i32 = var
 %notneg = add %n, 1

@@ -1,5 +1,6 @@
 ; https://github.com/llvm/llvm-project/issues/61223
-; Partial
+; Optimal
+; C_1 \ge 0 \land C_1 = - C_2 \models (x + C_1) \gg_u C_2 \Rightarrow x \gg_u C_2
 
 %0:i32 = var
 %2 = and %0, 1
@@ -12,13 +13,8 @@ infer %5
 result %2_
 
 
-; Suboptimal generalization
-; this can be easily made width independent
-
-;	Generalized (profit=1):
-
-;(v0 (knownBits=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx1) + 0xFFFFFFFF) >>l C2 (knownBits=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx1)
+;C1 (nonNegative) == (C2 * sext(1))
+;  |=
+;(v0 + C1) >>l C2
 ;  =>
 ;v0 >>l C2
-
-; FAIL

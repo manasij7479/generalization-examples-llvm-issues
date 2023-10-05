@@ -1,5 +1,6 @@
 ; https://github.com/llvm/llvm-project/issues/60242
-; Optimal
+; Partial
+; \text{Could not prove width independence}
 
 %0:i32 = var
 %1:i32 = lshr %0, 31:i32

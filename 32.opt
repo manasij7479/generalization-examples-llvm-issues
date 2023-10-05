@@ -1,5 +1,6 @@
 ; https://github.com/llvm/llvm-project/issues/57448
 ; Fail
+; \text{Crash}
 
 %0:i64 = var
 %1:i1 = eq 0:i64, %0

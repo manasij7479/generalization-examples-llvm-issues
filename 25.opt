@@ -1,6 +1,6 @@
-;
+; placeholder
 ; Fail
-
+; \text{Expression synthesis fails}
 %0:i16 = var
 %2 = sdiv %0, 4
 %3 = and %0, -32765
@@ -20,3 +20,6 @@ result %2_
 ; TODO investigate if we can do better
 
 ; FAIL
+; Requires a simple combination.
+; power of two, signedmin/max, comparison
+; make it work

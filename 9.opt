@@ -1,5 +1,6 @@
 ; https://github.com/llvm/llvm-project/issues/62163
 ; Optimal
+; x \: /_s \: (1 \: \%_s \: x) \Rightarrow x
 
 %0:i32 = var
 %2 = ashr  %0, 1
