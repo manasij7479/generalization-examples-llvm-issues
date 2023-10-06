@@ -1,6 +1,6 @@
 ; https://github.com/llvm/llvm-project/issues/60799
 ; Success
-; x == 0 \: ? \: 0 : 1 \ll \text{cttz}(x) \Rightarrow x \: \& \: (0 - x)
+; x = 0 \: ? \: 0 : 1 \ll \text{cttz}(x) \Rightarrow x \: \& \: (0 - x)
 
 %arg:i32 = var
 %eq = eq %arg, 0

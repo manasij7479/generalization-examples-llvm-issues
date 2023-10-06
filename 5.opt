@@ -1,6 +1,6 @@
 ; https://github.com/llvm/llvm-project/issues/62263
 ; Success
-; (x | y) == 0 \: ? \: x : 0 \Rightarrow 0
+; (x | y) = 0 \: ? \: x : 0 \Rightarrow 0
 
 %0:i32 = var
 %1:i32 = var

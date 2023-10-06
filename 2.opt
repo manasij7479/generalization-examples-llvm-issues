@@ -1,6 +1,6 @@
 ; https://github.com/llvm/llvm-project/issues/65968
 ; Success
-; ((x \: \& \: \text{SMin}) \oplus \text{SMin}) == ((\BitNeg{y} \: \& \: \text{Min}_S) \oplus \text{Min}_S) \Rightarrow (y \oplus x) <_s 0
+; ((x \: \& \: \text{SMin}) \oplus \text{SMin}) = ((\BitNeg{y} \: \& \: \text{SMin}) \oplus \text{SMin}) \Rightarrow (y \oplus x) <_s 0
 
 %x:i32 = var
 %y:i32 = var

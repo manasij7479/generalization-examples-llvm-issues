@@ -1,5 +1,5 @@
 ; https://github.com/llvm/llvm-project/issues/61644
-; Fail
+; Partial
 ; \text{Could not prove width independence}
 
 %0:i32 = var
