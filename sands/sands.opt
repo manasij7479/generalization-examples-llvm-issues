@@ -1,0 +1,202 @@
+; extracted from:
+; https://llvm.org/devmtg/2011-11/Sands_Super-optimizingLLVMIR.pdf
+
+; ===========================================
+; X - (X - Y) → Y
+
+%0:i32 = var
+%1:i32 = var
+%a = sub %0, %1
+%b = sub %0, %a
+infer %b
+result %1
+
+; ===========================================
+; (X<<1) - X → X
+
+%0:i32 = var
+%a = shl %0, 1
+%b = sub %a, %0
+infer %b
+result %0
+
+; ===========================================
+; non-negative number + power-of-two != 0 → true
+
+%0:i32 = var
+%1:i32 = var
+%nonneg = lshr %0, 1
+%powerof2 = shl 1, %1
+%sum = add %nonneg, %powerof2
+%cmp =  ne %sum, 0
+infer %cmp
+result 1:i1
+
+; ===========================================
+; zext x <s 0 → 0
+
+%0:i32 = var
+%ext:i33 = zext %0
+%cmp = slt  %ext, 0
+infer %cmp
+result 0:i1
+
+; ===========================================
+; ((x + z) *nsw y) /s y → x + z
+
+%x:i10 = var
+%y:i10 = var
+%z:i10 = var
+%add = add %x, %z
+%mul = mulnsw %add, %y
+%div = sdiv %mul, %y
+infer %div
+%add_ = add %x, %z
+result %add_
+
+; ===========================================
+; x - (x + y) → 0 - y
+
+%x:i32 = var
+%y:i32 = var
+%add = add %x, %y
+%sub = sub %x, %add
+infer %sub
+%sub_ = sub 0, %y
+result %sub_
+
+; ===========================================
+; ( (X >s Y) ? X : Y ) >=s X → true
+
+%x:i32 = var
+%y:i32 = var
+%cmp1 = slt %y, %x
+%res = select %cmp1, %x, %y
+%cmp2 = sle %x, %res
+infer %cmp2
+result 1:i1
+
+; ===========================================
+; X rem ( Y ? X : 1 ) → 0
+
+%x:i16 = var
+%y:i16 = var
+%cmp = ne %y, 0
+%sel = select %cmp, %x, 1
+%rem = srem %x, %sel
+infer %rem
+result 0:i16
+
+; ===========================================
+; (Y /u X) >u Y → false
+
+%x:i16 = var
+%y:i16 = var
+%div = udiv %y, %x
+%cmp = ult %y, %div
+infer %cmp
+result 0:i1
+
+; ===========================================
+; (X *nsw Y) /s Y → X
+
+%x:i10 = var
+%y:i10 = var
+%mul = mulnsw  %x, %y
+%div = sdiv %mul, %y
+infer %div
+result %x
+
+; ===========================================
+; X +nsw Z >=s Z +nsw Y
+
+%x:i32 = var
+%y:i32 = var
+%z:i32 = var
+%sum1 = addnsw %x, %z
+%sum2 = addnsw %z, %y
+%cmp = sle %sum2, %sum1
+infer %cmp
+%cmp_ = sle %y, %x
+result %cmp_
+
+; ===========================================
+; X >=s X +nsw Y
+
+%x:i32 = var
+%y:i32 = var
+%sum = addnsw %x, %y
+%cmp = sle %sum, %x
+infer %cmp
+%cmp_ = slt %y, 1
+result %cmp_
+
+; ===========================================
+; ((X + Y) + -1) == X
+%x:i32 = var
+%y:i32 = var
+%sum1 = add %x, %y
+%sum2 = add %sum1, -1
+%cmp = eq %sum2, %x
+infer %cmp
+%cmp_ = eq %y, 1
+result %cmp_
+
+; ===========================================
+; Y >>exact X == 0
+
+%x:i32 = var
+%y:i32 = var
+%sh = ashrexact %y, %x
+%cmp = eq %sh, 0
+infer %cmp
+%cmp_ = eq %y, 0
+result %cmp_
+
+; ===========================================
+; Y <<nsw X == 0
+
+%x:i32 = var
+%y:i32 = var
+%sh = shlnsw %y, %x
+%cmp = eq %sh, 0
+infer %cmp
+%cmp_ = eq %y, 0
+result %cmp_
+
+; ===========================================
+; (A + B) * (C + D) == B * C + B * D => A * C + A * D == 0
+
+%a:i32 = var
+%b:i32 = var
+%c:i32 = var
+%d:i32 = var
+%sum1 = add %a, %b
+%sum2 = add  %c, %d
+%prod1 = mul  %sum1, %sum2
+%prod2 = mul  %b, %c
+%prod3 = mul  %b, %d
+%sum3 = add  %prod2, %prod3
+%cmp = eq %prod1, %sum3
+infer %cmp
+%prod1_ = mul %a, %c
+%prod2_ = mul %a, %d
+%sum_ = add %prod1_, %prod2_
+%cmp_ =  eq %sum_, 0
+result %cmp
+
+; ===========================================
+; ???
+
+%x:i64 = var
+%xl:i32 = trunc %x
+%h = lshr %x, 32
+%xh:i32 = trunc %h
+%eh:i64 = zext %xh
+%el:i64 = zext %xl
+%h2 = shl %eh, 32
+%r = or %h2, %el
+infer %r
+result %x
+
+; ===========================================

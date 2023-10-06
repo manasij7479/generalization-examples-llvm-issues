@@ -1,6 +1,6 @@
 ; https://github.com/llvm/llvm-project/issues/62155
 ; Success
-; (x \: \& \: (s(1) \gg 1)) = 0 \: ? \: 0 : x \ll 1 \Rightarrow x \ll 1
+; (x \: \& \: \text{SMax}) = 0 \: ? \: 0 : x \ll 1 \Rightarrow x \ll 1
 
 %0:i32 = var
 %2 = and %0, 2147483647
